@@ -7,9 +7,13 @@ RUN mkdir /app
 RUN git clone https://github.com/jtn-ms/refacer.git /app/refacer
 
 # Download models
+# https://huggingface.co/Devia/G/blob/main/inswapper_128.onnx
+# https://huggingface.co/thebiglaskowski/inswapper_128.onnx/blob/main/inswapper_128.onnx
 # RUN cd /app/refacer && wget --content-disposition https://huggingface.co/deepinsight/inswapper/resolve/main/inswapper_128.onnx
 # RUN cd /app/refacer && wget --content-disposition https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip && unzip buffalo_l.zip
-
+RUN cd /app/refacer && wget -O ./checkpoints/inswapper_128.onnx https://huggingface.co/ashleykleynhans/inswapper/resolve/main/inswapper_128.onnx
+#
+RUN cd /app/refacer && pip install -r requirements.txt
 #
 RUN cd /app/refacer && pip install -r requirements.txt
 
