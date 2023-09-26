@@ -1,0 +1,23 @@
+FROM python:3.10.11
+
+RUN apt update && apt install  -y --no-install-recommends vim nmap lsof zip python3-opencv ffmpeg
+
+# Download latest github/refacer in refacer directory
+RUN mkdir /app
+RUN git clone https://github.com/jtn-ms/refacer.git /app/refacer
+
+# Download models
+# RUN cd /app/refacer && wget --content-disposition https://huggingface.co/deepinsight/inswapper/resolve/main/inswapper_128.onnx
+# RUN cd /app/refacer && wget --content-disposition https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip && unzip buffalo_l.zip
+
+#
+RUN cd /app/refacer && pip install -r requirements.txt
+
+# gradio default port - 7860
+# http://127.0.0.1:7860/
+
+EXPOSE 8080
+#RUN python3 app.py
+
+WORKDIR /app/refacer
+CMD ["python", "app.py"]
